@@ -1,0 +1,544 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="In_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="In_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="In_Edge" Type="InArgument(ui:Browser)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>832,1765</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="58">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="96">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="682,1700" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="DownloadLink" />
+      <Variable x:TypeArguments="x:String" Name="ExtractPDFText" />
+      <Variable x:TypeArguments="x:String" Name="strDate" />
+      <Variable x:TypeArguments="x:String" Name="strCurrency" />
+      <Variable x:TypeArguments="x:String" Name="strTaxID" />
+      <Variable x:TypeArguments="x:String" Name="strInvoiceID" />
+      <Variable x:TypeArguments="x:String" Name="strUnTaxed" />
+      <Variable x:TypeArguments="x:String" Name="strTax" />
+      <Variable x:TypeArguments="x:String" Name="strTotal" />
+      <Variable x:TypeArguments="x:String" Name="strItemDescription" />
+      <Variable x:TypeArguments="x:Boolean" Name="VendorFound" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="640,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <Flowchart DisplayName="Flowchart || Process" sap:VirtualizedContainerService.HintSize="640,1469" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+          <av:Size x:Key="ShapeSize">60,75</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,109.5</av:PointCollection>
+          <x:Double x:Key="Height">1423</x:Double>
+          <x:Double x:Key="Width">606</x:Double>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Flowchart.StartNode>
+        <x:Reference>__ReferenceID15</x:Reference>
+      </Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,289.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,61</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,350.5 300,380</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_DownloadPDF.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ACME\ACME_DownloadPDF.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="In_DownloadLink">[DownloadLink]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="In_PDFPath">[In_Config("PDFPath").ToString]</InArgument>
+            <InArgument x:TypeArguments="ui:Browser" x:Key="In_Edge">[In_Edge]</InArgument>
+            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_DelayActivity">[TimeSpan.Parse(In_Config("DelayActivity").ToString)]</InArgument>
+            <InArgument x:TypeArguments="ui:QueueItem" x:Key="In_TransactionItem">[In_TransactionItem]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <av:Point x:Key="ShapeLocation">200,380</av:Point>
+                <av:Size x:Key="ShapeSize">200,61</av:Size>
+                <av:PointCollection x:Key="ConnectorLocation">300,441 300,480</av:PointCollection>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_GetPDFText.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="ACME\ACME_GetPDFText.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="In_PDFPath">[In_Config("PDFPath").ToString]</InArgument>
+                <InArgument x:TypeArguments="ui:QueueItem" x:Key="In_TransactionItem">[In_TransactionItem]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="Out_ExtractPDFText">[ExtractPDFText]</OutArgument>
+                <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <FlowStep.Next>
+              <FlowStep x:Name="__ReferenceID4">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <av:Point x:Key="ShapeLocation">200,480</av:Point>
+                    <av:Size x:Key="ShapeSize">200,61</av:Size>
+                    <av:PointCollection x:Key="ConnectorLocation">300,542 300,572 299.64166666666665,572 299.64166666666665,576.5</av:PointCollection>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_GetInformationFromPDFText.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="ACME\ACME_GetInformationFromPDFText.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="In_ExtractPDFText">[ExtractPDFText]</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_Currency">[strCurrency]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_Date">[strDate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_TaxID">[strTaxID]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_InvoiceID">[strInvoiceID]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_UnTaxed">[strUnTaxed]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_Tax">[strTax]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_Total">[strTotal]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="Out_ItemDescription">[strItemDescription]</OutArgument>
+                    <InArgument x:TypeArguments="ui:QueueItem" x:Key="In_TransactionItem">[In_TransactionItem]</InArgument>
+                    <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <FlowStep.Next>
+                  <FlowDecision x:Name="__ReferenceID7" Condition="[strTaxID &lt;&gt; &quot;&quot;]" DisplayName="Tax ID Found " sap:VirtualizedContainerService.HintSize="77,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <av:Point x:Key="ShapeLocation">260.64166666666665,576.5</av:Point>
+                        <av:Size x:Key="ShapeSize">77,87</av:Size>
+                        <av:PointCollection x:Key="TrueConnector">260.64166666666665,620 160,620 160,689.5</av:PointCollection>
+                        <av:PointCollection x:Key="FalseConnector">338.64166666666665,620 530,620 530,1060.5 500,1060.5</av:PointCollection>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <FlowDecision.True>
+                      <FlowStep x:Name="__ReferenceID5">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <av:Point x:Key="ShapeLocation">60,689.5</av:Point>
+                            <av:Size x:Key="ShapeSize">200,61</av:Size>
+                            <av:PointCollection x:Key="ConnectorLocation">160,751.5 160,779.5</av:PointCollection>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_OpenSearchForVendors.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="ACME\ACME_OpenSearchForVendors.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                            <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_DelayActivity">[TimeSpan.Parse(In_Config("DelayActivity").ToString)]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="In_SearchVendorsURL">[In_Config("ACME_SearchVendorsURL").ToString]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:InvokeWorkflowFile>
+                        <FlowStep.Next>
+                          <FlowStep x:Name="__ReferenceID6">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <av:Point x:Key="ShapeLocation">60,779.5</av:Point>
+                                <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                <av:PointCollection x:Key="ConnectorLocation">160,840.5 160,870.5 283.64166666666665,870.5 283.64166666666665,886.5</av:PointCollection>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_FindVendors.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="ACME\ACME_FindVendors.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                                <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="In_TaxID">[strTaxID]</InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="In_DelayS">[CInt(In_Config("DelayS"))]</InArgument>
+                                <OutArgument x:TypeArguments="x:Boolean" x:Key="Out_VendorFound">[VendorFound]</OutArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:InvokeWorkflowFile>
+                            <FlowStep.Next>
+                              <FlowDecision x:Name="__ReferenceID8" Condition="[VendorFound]" DisplayName=" Vendor Found " sap:VirtualizedContainerService.HintSize="86,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <av:Point x:Key="ShapeLocation">240.64166666666665,886.5</av:Point>
+                                    <av:Size x:Key="ShapeSize">86,87</av:Size>
+                                    <av:PointCollection x:Key="TrueConnector">240.64166666666665,930 150,930 150,1029.02</av:PointCollection>
+                                    <av:PointCollection x:Key="FalseConnector">326.64166666666665,930 400,930 400,1029.5</av:PointCollection>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <FlowDecision.True>
+                                  <FlowStep x:Name="__ReferenceID9">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <av:Point x:Key="ShapeLocation">50,1029.02</av:Point>
+                                        <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                        <av:PointCollection x:Key="ConnectorLocation">150,1090.02 150,1119.02</av:PointCollection>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_OpenAddInvoiceDetails.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="ACME\ACME_OpenAddInvoiceDetails.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="In_VendorFound">[VendorFound]</InArgument>
+                                        <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                                        <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                                        <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_DelayActivity">[TimeSpan.Parse(In_Config("DelayActivity").ToString)]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="In_AddInvoiceDetailsURL">[In_Config("ACME_AddInvoiceDetailsURL").ToString]</InArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:InvokeWorkflowFile>
+                                    <FlowStep.Next>
+                                      <FlowStep x:Name="__ReferenceID10">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <av:Point x:Key="ShapeLocation">50,1119.02</av:Point>
+                                            <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                            <av:PointCollection x:Key="ConnectorLocation">150,1180.02 150,1209.02</av:PointCollection>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_AddInvoiceDetails.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="ACME\ACME_AddInvoiceDetails.xaml">
+                                          <ui:InvokeWorkflowFile.Arguments>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_InvoiceNumber">[strInvoiceID]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_TaxID">[strTaxID]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_Date">[strDate]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_Currency">[strCurrency]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_ItemDescription">[strItemDescription]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_UnTaxed">[strUnTaxed]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_Tax">[strTax]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_Total">[strTotal]</InArgument>
+                                            <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                                            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                                          </ui:InvokeWorkflowFile.Arguments>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:InvokeWorkflowFile>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID11">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <av:Point x:Key="ShapeLocation">50,1209.02</av:Point>
+                                                <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                                <av:PointCollection x:Key="ConnectorLocation">150,1270.02 150,1299.02</av:PointCollection>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_OpenUpdateWorkItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="ACME\ACME_OpenUpdateWorkItem.xaml">
+                                              <ui:InvokeWorkflowFile.Arguments>
+                                                <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                                                <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                                                <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_DelayActivity">[TimeSpan.Parse(In_Config("DelayActivity").ToString)]</InArgument>
+                                                <InArgument x:TypeArguments="x:String" x:Key="In_UpdateWorkItemsURL">[In_Config("ACME_UpdateWorkItemsURL").ToString.Trim + In_TransactionItem.SpecificContent("WIID").ToString.Trim]</InArgument>
+                                                <InArgument x:TypeArguments="ui:Browser" x:Key="In_Edge">[In_Edge]</InArgument>
+                                              </ui:InvokeWorkflowFile.Arguments>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:InvokeWorkflowFile>
+                                            <FlowStep.Next>
+                                              <FlowStep x:Name="__ReferenceID12">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <av:Point x:Key="ShapeLocation">50,1299.02</av:Point>
+                                                    <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_UpdateWorkItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="ACME\ACME_UpdateWorkItem.xaml">
+                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                    <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                                                    <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="In_Comment">[In_Config("CompletedCommentPart1").ToString + " " + strInvoiceID + " " + In_Config("CompletedCommentPart2").ToString]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="In_Status">[In_Config("CompletedStatus").ToString]</InArgument>
+                                                    <InArgument x:TypeArguments="x:Int32" x:Key="In_DelayS">[CInt(In_Config("DelayS"))]</InArgument>
+                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:InvokeWorkflowFile>
+                                              </FlowStep>
+                                            </FlowStep.Next>
+                                          </FlowStep>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowStep.Next>
+                                  </FlowStep>
+                                </FlowDecision.True>
+                                <FlowDecision.False>
+                                  <FlowStep x:Name="__ReferenceID0">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <av:Point x:Key="ShapeLocation">300,1029.5</av:Point>
+                                        <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                        <av:PointCollection x:Key="ConnectorLocation">400,1090.5 400,1119.5</av:PointCollection>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_SendEmail.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="ACME\ACME_SendEmail.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">
+                                          <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="CInt(In_Config(&quot;Retry&quot;))" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">
+                                          <VisualBasicValue x:TypeArguments="x:TimeSpan" ExpressionText="TimeSpan.Parse(In_Config(&quot;RetryInterval&quot;).ToString)" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="In_AttachFilePath">
+                                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="In_Config(&quot;PDFPath&quot;).ToString + &quot;\&quot; + In_TransactionItem.SpecificContent(&quot;WIID&quot;).ToString + &quot;.pdf&quot;" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="In_Subject">
+                                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="In_Config(&quot;VDDSubject&quot;).ToString" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="In_MailTo">
+                                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="In_Config(&quot;ACME_VDDMail&quot;).ToString" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="In_Server">
+                                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="In_Config(&quot;Server&quot;).ToString" />
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:Int32" x:Key="In_Port">
+                                          <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="CInt(In_Config(&quot;port&quot;))" />
+                                        </InArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:InvokeWorkflowFile>
+                                    <FlowStep.Next>
+                                      <FlowStep x:Name="__ReferenceID13">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <av:Point x:Key="ShapeLocation">300,1119.5</av:Point>
+                                            <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                            <av:PointCollection x:Key="ConnectorLocation">400,1180.5 400,1209.5</av:PointCollection>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_OpenUpdateWorkItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="347,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="ACME\ACME_OpenUpdateWorkItem.xaml">
+                                          <ui:InvokeWorkflowFile.Arguments>
+                                            <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">
+                                              <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="CInt(In_Config(&quot;Retry&quot;))" />
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">
+                                              <VisualBasicValue x:TypeArguments="x:TimeSpan" ExpressionText="TimeSpan.Parse(In_Config(&quot;RetryInterval&quot;).ToString)" />
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_DelayActivity">
+                                              <VisualBasicValue x:TypeArguments="x:TimeSpan" ExpressionText="TimeSpan.Parse(In_Config(&quot;DelayActivity&quot;).ToString)" />
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="In_UpdateWorkItemsURL">
+                                              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="In_Config(&quot;ACME_UpdateWorkItemsURL&quot;).ToString.Trim + In_TransactionItem.SpecificContent(&quot;WIID&quot;).ToString.Trim" />
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="ui:Browser" x:Key="In_Edge">
+                                              <VisualBasicValue x:TypeArguments="ui:Browser" ExpressionText="In_Edge" />
+                                            </InArgument>
+                                          </ui:InvokeWorkflowFile.Arguments>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:InvokeWorkflowFile>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID14">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <av:Point x:Key="ShapeLocation">300,1209.5</av:Point>
+                                                <av:Size x:Key="ShapeSize">200,61</av:Size>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_UpdateWorkItem.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="ACME\ACME_UpdateWorkItem.xaml">
+                                              <ui:InvokeWorkflowFile.Arguments>
+                                                <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+                                                <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+                                                <InArgument x:TypeArguments="x:String" x:Key="In_Comment">[In_Config("RejectedCommentPart1").ToString + " " + strTaxID + " " + In_Config("RejectedCommentPart2").ToString]</InArgument>
+                                                <InArgument x:TypeArguments="x:String" x:Key="In_Status">[In_Config("RejectedStatus").ToString]</InArgument>
+                                                <InArgument x:TypeArguments="x:Int32" x:Key="In_DelayS">[CInt(In_Config("DelayS"))]</InArgument>
+                                              </ui:InvokeWorkflowFile.Arguments>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:InvokeWorkflowFile>
+                                          </FlowStep>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowStep.Next>
+                                  </FlowStep>
+                                </FlowDecision.False>
+                              </FlowDecision>
+                            </FlowStep.Next>
+                          </FlowStep>
+                        </FlowStep.Next>
+                      </FlowStep>
+                    </FlowDecision.True>
+                    <FlowDecision.False>
+                      <x:Reference>__ReferenceID0</x:Reference>
+                    </FlowDecision.False>
+                  </FlowDecision>
+                </FlowStep.Next>
+              </FlowStep>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+      <FlowStep x:Name="__ReferenceID2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,199.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,61</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,260.5 300,289.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_GetDownloadLink.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="ACME\ACME_GetDownloadLink.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="Out_DownloadLink">[DownloadLink]</OutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="In_LinkPart1">[In_Config("ACME_PDFPart1URL").ToString]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <FlowStep.Next>
+          <x:Reference>__ReferenceID1</x:Reference>
+        </FlowStep.Next>
+      </FlowStep>
+      <FlowStep x:Name="__ReferenceID15">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,109.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,61</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,170.5 300,199.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ACME\ACME_OpenWorkItemDetails.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,61" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="ACME\ACME_OpenWorkItemDetails.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:Int32" x:Key="In_Retry">[CInt(In_Config("Retry"))]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="In_WorkItemsURL">[In_Config("ACME_WorkItems_URL").ToString]</InArgument>
+            <InArgument x:TypeArguments="ui:QueueItem" x:Key="In_TransactionItem">[In_TransactionItem]</InArgument>
+            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_RetryInterval">[TimeSpan.Parse(In_Config("RetryInterval").ToString)]</InArgument>
+            <InArgument x:TypeArguments="x:TimeSpan" x:Key="In_DelayActivity">[TimeSpan.Parse(In_Config("DelayActivity").ToString)]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="In_Browser">[In_Config("Browser").ToString]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <FlowStep.Next>
+          <x:Reference>__ReferenceID2</x:Reference>
+        </FlowStep.Next>
+      </FlowStep>
+      <x:Reference>__ReferenceID3</x:Reference>
+      <x:Reference>__ReferenceID4</x:Reference>
+      <x:Reference>__ReferenceID5</x:Reference>
+      <x:Reference>__ReferenceID6</x:Reference>
+      <x:Reference>__ReferenceID7</x:Reference>
+      <x:Reference>__ReferenceID8</x:Reference>
+      <x:Reference>__ReferenceID9</x:Reference>
+      <x:Reference>__ReferenceID10</x:Reference>
+      <x:Reference>__ReferenceID11</x:Reference>
+      <x:Reference>__ReferenceID12</x:Reference>
+      <x:Reference>__ReferenceID13</x:Reference>
+      <x:Reference>__ReferenceID14</x:Reference>
+      <x:Reference>__ReferenceID0</x:Reference>
+    </Flowchart>
+  </Sequence>
+</Activity>
